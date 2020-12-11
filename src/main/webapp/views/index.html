@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Products</h3>
+
+<div class="container" style="background-color: #D9AFD9;
+background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+">
+    <div class="notify">
+        <div th:if="${success}">
+            <span th:text="${success}"></span>
+        </div>
+    </div>
+<!--    <div class="alert alert-success alert-dismissible fade show" role="alert">-->
+<!--        <strong th:text="asdfg + ${success}"></strong>-->
+<!--        <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--            <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--    </div>-->
+    <div class="row">
+        <p>
+            <a class="btn btn-primary" th:href="@{/products/create}">
+                Add new product
+            </a>
+        </p>
+    </div>
+
+    <div class="row">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th colspan="3"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row,rowStat : ${products}">
+                <td th:text="${row.getName()}"></td>
+                <td th:text="${row.getPrice()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/products/{id}/edit(id=${row.getId()})}">edit</a></td>
+                <td><a class="btn btn-primary" th:href="@{/products/{id}/delete(id=${row.getId()})}">delete</a></td>
+                <td><a class="btn btn-primary" th:href="@{/products/{id}/view(id=${row.getId()})}">view</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
